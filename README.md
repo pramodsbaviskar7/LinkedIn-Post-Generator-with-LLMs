@@ -1,4 +1,4 @@
-# ✨ project-genai-post-generator ✨
+# ✨ LLM-based-post-generator ✨
 
 ## Vibe Check: What's This?
 This tool is your LinkedIn content bestie! It analyzes an influencer's LinkedIn posts and helps create fire new content that matches their unique style. No more staring at a blank screen wondering what to post!
