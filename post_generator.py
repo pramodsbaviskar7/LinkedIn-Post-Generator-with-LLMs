@@ -13,8 +13,21 @@ def get_length_str(length):
         return "11 to 15 lines"
 
 
+# def generate_post(length, language, tag):
+#     prompt = get_prompt(length, language, tag)
+#     response = llm.invoke(prompt)
+#     return response.content
+
 def generate_post(length, language, tag):
     prompt = get_prompt(length, language, tag)
+
+    # Sanitize prompt to avoid UnicodeEncodeError
+    try:
+        prompt = prompt.encode("utf-8", errors="replace").decode("utf-8")
+    except UnicodeEncodeError as e:
+        print(f"Encoding error: {e}")
+        return "An error occurred while preparing the prompt."
+
     response = llm.invoke(prompt)
     return response.content
 
