@@ -30,7 +30,7 @@ jobs:
     - name: Commit & Push
       run: |
         git add .
-        git commit -m "🤖 Auto commit test (every 1 min)" || echo "No changes to commit"
+        git commit -m "commit bug fixes time" || echo "No changes to commit"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
