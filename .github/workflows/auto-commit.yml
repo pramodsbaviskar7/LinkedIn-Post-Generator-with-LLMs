@@ -26,4 +26,6 @@ jobs:
       run: |
         git add .
         git commit -m "🤖 Auto commit test (every 1 min)" || echo "No changes to commit"
-        git push
+        git push https://github.com/${{ github.repository }}.git "main" --force
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # This ensures the token is used for authentication
