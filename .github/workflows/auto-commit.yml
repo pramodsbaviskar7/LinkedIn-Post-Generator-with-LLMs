@@ -5,6 +5,9 @@ on:
     - cron: "* * * * *"  # Every minute
   workflow_dispatch:
 
+permissions:
+  contents: write  # Grant write permission to the repository
+
 jobs:
   auto-commit:
     runs-on: ubuntu-latest
@@ -12,11 +15,13 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GH_TOKEN }}  # Use the PAT for checkout
 
     - name: Set up Git
       run: |
-        git config user.name "pramodsbaviskar7"
-        git config user.email "pramodsbaviskar7@gmail.com"
+        git config --global user.name "pramodsbaviskar7"
+        git config --global user.email "pramodsbaviskar7@gmail.com"
 
     - name: Run Python Script
       run: |
@@ -26,6 +31,6 @@ jobs:
       run: |
         git add .
         git commit -m "🤖 Auto commit test (every 1 min)" || echo "No changes to commit"
-        git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git "main" --force
+        git push origin main
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}  # Using the secret for authentication
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
