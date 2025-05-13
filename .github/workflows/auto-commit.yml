@@ -1,0 +1,29 @@
+name: Auto Commit Every Minute (Testing)
+
+on:
+  schedule:
+    - cron: "* * * * *"  # Every minute
+  workflow_dispatch:
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Git
+      run: |
+        git config user.name "pramodsbaviskar7"
+        git config user.email "pramodsbaviskar7@gmail.com"
+
+    - name: Run Python Script
+      run: |
+        python3 scripts/auto_commit.py
+
+    - name: Commit & Push
+      run: |
+        git add .
+        git commit -m "🤖 Auto commit test (every 1 min)" || echo "No changes to commit"
+        git push
