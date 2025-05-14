@@ -5,7 +5,18 @@ from post_generator import generate_post
 # Options
 length_options = ["Short", "Medium", "Long"]
 language_options = ["English", "Hinglish"]
-tone_options = ["Informative", "Inspirational", "Celebratory", "Promotional", "Reflective"]
+tone_options = [
+    "Informative", 
+    "Inspirational", 
+    "Celebratory", 
+    "Promotional", 
+    "Reflective", 
+    "Conversational", 
+    "Professional", 
+    "Casual", 
+    "Humorous", 
+    "Friendly"
+]
 
 def main():
     st.title("🔧 LinkedIn Content Creator Tool")
@@ -33,21 +44,32 @@ def main():
     with col2:
         selected_language = st.selectbox("Language", options=language_options)
     
-    # Optional enhancements
     st.markdown("### 🧩 Optional Enhancements")
     
+    # Tone selection (choose or enter)
     tone_enabled = st.checkbox("Choose tone & intent")
     if tone_enabled:
-        tone = st.selectbox("Select tone/intent", options=tone_options)
+        tone_input_method = st.radio(
+            "How would you like to set the tone?",
+            options=["Choose from suggestions", "Enter your own tone"],
+            horizontal=True
+        )
+        
+        if tone_input_method == "Choose from suggestions":
+            tone = st.selectbox("Select tone/intent", options=tone_options)
+        else:
+            tone = st.text_input("Enter your custom tone", placeholder="e.g., Friendly, Motivational, Bold")
     else:
         tone = None
-    
+
+    # Creativity control
     creativity_enabled = st.checkbox("Control creativity level")
     if creativity_enabled:
         creativity = st.slider("Creativity (0 = focused, 1 = creative)", 0.2, 1.0, 0.7)
     else:
         creativity = None
-    
+
+    # Hashtag enhancements
     hashtags_enabled = st.checkbox("Add or generate hashtags")
     if hashtags_enabled:
         hashtag_mode = st.radio("How would you like to handle hashtags?", ["Add manually", "Auto-generate"])
@@ -57,7 +79,7 @@ def main():
             custom_hashtags = "AUTO"
     else:
         custom_hashtags = None
-    
+
     # Generate button
     if st.button("🚀 Generate Post"):
         if selected_tag.strip():
@@ -72,7 +94,6 @@ def main():
             st.success("✅ Post generated successfully!")
             st.markdown("### 📝 Your LinkedIn Post")
             
-            # Use text_area for proper word wrapping and easy copying
             st.text_area(
                 "Generated Post",
                 value=post,
@@ -80,10 +101,6 @@ def main():
                 help="Click and press Ctrl+A to select all, then Ctrl+C to copy",
                 key="generated_post"
             )
-            
-            # Alternative: Use st.info() for simple display
-            # st.info(post)
-            
         else:
             st.error("⚠️ Please provide a valid topic.")
 
