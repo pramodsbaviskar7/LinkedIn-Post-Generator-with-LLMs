@@ -5,7 +5,8 @@ This tool is your LinkedIn content bestie! It analyzes an influencer's LinkedIn 
 
 Imagine: Your fave LinkedIn creator needs fresh content but doesn't have the mental bandwidth. They can just feed their past bangers into this tool, pick a topic, and boom! A new post that sounds exactly like them is ready to drop.
 
-<img src="assets/Screenshot 2025-05-13 031642.png"/>
+<img src="assets/Screenshot 2025-05-18 175243.png"/>
+<img src="assets/Screenshot 2025-05-18 175316.png"/>
 
 ## High Level Architecture
 ```
